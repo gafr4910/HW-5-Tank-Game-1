@@ -11,11 +11,13 @@ class Bullet {
   }
 
   activate(x, y, forward) {
-    this.x = x;
-    this.y = y;
+    // this.x = x;
+    // this.y = y;
     this.forward = forward;
+    this.x = x + -25 * Math.sin(this.forward);
+    this.y = y + 25 * Math.cos(this.forward);
     this.isActive = true;
-    this.activeTime = 2000;
+    this.activeTime = 5000;
   }
 
   deactivate() {
@@ -33,6 +35,9 @@ class Bullet {
       // Deactivate bullet when it's been alive for too long 
       this.activeTime -= deltaTime;
       if (this.activeTime < 0) {
+        this.deactivate();
+      }
+      if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 600) {
         this.deactivate();
       }
     }
